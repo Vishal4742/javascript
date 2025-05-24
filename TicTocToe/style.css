@@ -13,4 +13,14 @@ body{
 }
 .game{
     height : 60vmin;
+    width : 60vmin;
+    display : flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1vmin;
+}
+.box{
+    height : 18vmin;
+    width : 18vmin;
 }
