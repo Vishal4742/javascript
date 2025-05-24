@@ -10,6 +10,10 @@ body{
 
 .container{
     height : 70vh;
+    display : flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5vmin;
 }
 .game{
     height : 60vmin;
@@ -18,7 +22,7 @@ body{
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 1vmin;
+    gap: 1.5vmin;
 }
 .box{
     height : 18vmin;
