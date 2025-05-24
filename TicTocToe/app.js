@@ -20,3 +20,32 @@ boxes.forEach(box => {
         }
     });
 });
+reset.addEventListener('click', () => {
+    boxes.forEach(box => {
+        box.innerHTML = '';
+        box.style.pointerEvents = 'auto'; // Enable clicking again
+    });
+    turnO = true;
+});
+function checkWinner() {
+    let winner = null;
+    winningCombos.forEach(combo => {
+        const [a, b, c] = combo;
+        if (boxes[a].innerHTML && boxes[a].innerHTML === boxes[b].innerHTML && boxes[a].innerHTML === boxes[c].innerHTML) {
+            winner = boxes[a].innerHTML;
+        }
+    });
+    if (winner) {
+        // Disable further moves after win
+        boxes.forEach(box => box.style.pointerEvents = 'none');
+        setTimeout(() => {
+            alert(`${winner} wins!`);
+            reset.click();
+        }, 100);
+    } else if ([...boxes].every(box => box.innerHTML !== '')) {
+        setTimeout(() => {
+            alert('It\'s a draw!');
+            reset.click();
+        }, 100);
+    }
+}
