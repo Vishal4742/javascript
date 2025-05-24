@@ -1,5 +1,5 @@
 let boxes = document.querySelectorAll('.box');
-let reset = document.querySelector('#reset-btn');
+let reset = document.querySelector('.reset'); // Fixed selector to match index.html
 let turnO = true;
 const winningCombos = [
     [0, 1, 2],
@@ -11,6 +11,15 @@ const winningCombos = [
     [0, 4, 8],
     [2, 4, 6]
 ];
+
+function resetGame() {
+    boxes.forEach(box => {
+        box.innerHTML = '';
+        box.style.pointerEvents = 'auto'; // Enable clicking again
+    });
+    turnO = true;
+}
+
 boxes.forEach(box => {
     box.addEventListener('click', () => {
         if (box.innerHTML === '') {
@@ -20,18 +29,18 @@ boxes.forEach(box => {
         }
     });
 });
-reset.addEventListener('click', () => {
-    boxes.forEach(box => {
-        box.innerHTML = '';
-        box.style.pointerEvents = 'auto'; // Enable clicking again
-    });
-    turnO = true;
-});
+
+reset.addEventListener('click', resetGame);
+
 function checkWinner() {
     let winner = null;
     winningCombos.forEach(combo => {
         const [a, b, c] = combo;
-        if (boxes[a].innerHTML && boxes[a].innerHTML === boxes[b].innerHTML && boxes[a].innerHTML === boxes[c].innerHTML) {
+        if (
+            boxes[a].innerHTML &&
+            boxes[a].innerHTML === boxes[b].innerHTML &&
+            boxes[a].innerHTML === boxes[c].innerHTML
+        ) {
             winner = boxes[a].innerHTML;
         }
     });
@@ -40,12 +49,12 @@ function checkWinner() {
         boxes.forEach(box => box.style.pointerEvents = 'none');
         setTimeout(() => {
             alert(`${winner} wins!`);
-            reset.click();
+            resetGame();
         }, 100);
     } else if ([...boxes].every(box => box.innerHTML !== '')) {
         setTimeout(() => {
             alert('It\'s a draw!');
-            reset.click();
+            resetGame();
         }, 100);
     }
 }
